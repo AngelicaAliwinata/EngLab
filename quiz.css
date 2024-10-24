@@ -1,0 +1,251 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body Styles */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f4f9ff;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+.hide {
+    display: none;
+}
+
+/* Header Styles */
+header {
+    background-color: #1f3b73;
+    color: white;
+    padding: 20px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.logo-container {
+    margin-left: 20px;
+}
+
+.logo {
+    height: 80px;
+    width: auto;
+}
+
+header h1 {
+    font-size: 36px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-align: center;
+    flex-grow: 1;
+}
+
+nav {
+    margin-right: 20px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: #ffd700;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: #ffffff;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+}
+
+/* Main Content */
+main {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Specific Styles for the Quiz Page */
+.quiz-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 600px;
+    margin: 100px auto;
+}
+
+.quiz-box {
+    background-color: #1f3b73;
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.quiz-box:hover {
+    background-color: #ffd700;
+    color: #1f3b73;
+    transform: translateY(-2px); /* Slight lift effect on hover */
+}
+
+.quiz-box h2 {
+    margin-bottom: 10px;
+}
+
+/* Countdown Styles */
+.countdown {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ffd700;
+    text-align: center;
+    margin-top: 20px;
+    background-color: #1f3b73;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    display: none;
+}
+
+/* Quiz Form Styles */
+#quizForm {
+     /* Initially hidden */
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 600px;
+    margin: 20px auto;
+    text-align: left;
+}
+
+#quizForm label {
+    font-size: 18px;
+    margin: 10px 0;
+    display: block;
+}
+
+#quizForm input[type="radio"] {
+    margin-right: 10px;
+}
+
+#quizForm button {
+    background-color: #1f3b73;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#quizForm button:hover {
+    background-color: #ffd700;
+    color: #1f3b73;
+    transform: translateY(-2px); /* Slight lift effect on hover */
+}
+
+/* Quiz Result Styles */
+#quizResult {
+    display: none; /* Initially hidden */
+    background-color: #f4f9ff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 600px;
+    margin: 20px auto;
+    text-align: center;
+}
+
+#quizResult p {
+    font-size: 24px;
+    font-weight: bold;
+    color: #1f3b73;
+}
+
+/* Footer Styles */
+footer {
+    margin-top: 20px;
+    text-align: center;
+    color: #666;
+    font-size: 14px;
+}
+
+/* Adjusting quiz-box hover with countdown */
+.quiz-box:hover .countdown {
+    color: #1f3b73;
+    background-color: #f4f9ff;
+}
+
+footer {
+    margin-top: 40px;
+    color: #666;
+    font-size: 14px;
+    text-align: center;
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 28px;
+    }
+
+    .quiz-container {
+        max-width: 100%;
+        margin: 50px 20px;
+    }
+
+    #quizForm, #quizResult {
+        max-width: 100%;
+        margin: 10px;
+        padding: 15px;
+    }
+
+    .quiz-box {
+        padding: 15px;
+    }
+
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    nav ul li {
+        margin: 10px 0;
+    }
+}
+
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 24px;
+    }
+
+    .quiz-box, #quizForm, #quizResult {
+        padding: 10px;
+    }
+
+    nav ul {
+        padding: 0;
+    }
+
+    nav ul li a {
+        font-size: 16px;
+    }
+}

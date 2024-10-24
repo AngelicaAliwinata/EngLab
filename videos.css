@@ -1,0 +1,156 @@
+/* General reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+header {
+    background-color: #1f3b73;
+    color: white;
+    padding: 20px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%; /* Set width to 100% for full screen */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.logo-container {
+    margin-left: 20px;
+}
+
+.logo {
+    height: 80px;
+    width: auto;
+}
+
+header h1 {
+    font-size: 36px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-align: center;
+    flex-grow: 1;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    margin-right: 20px;
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: #ffd700;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: #ffffff;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+}
+
+main {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.section {
+    background-color: white;
+    margin-bottom: 20px;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.section h2 {
+    color: #1f3b73;
+    margin-bottom: 15px;
+    font-size: 28px;
+}
+
+/* Video Grid Styles */
+.video-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Jarak antar video */
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.video-box {
+    background-color: #ffd700;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    width: calc(33.33% - 20px); /* Ukuran responsif untuk 3 kolom */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.video-box:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.video-box img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.video-box h3 {
+    margin-top: 10px;
+    font-size: 18px;
+    color: #333;
+}
+
+/* Footer Styles */
+footer {
+    margin-top: 40px;
+    color: #666;
+    font-size: 14px;
+    text-align: center;
+}
+
+/* Responsive Adjustments */
+@media screen and (max-width: 768px) {
+    header h1 {
+        font-size: 28px; /* Mengurangi ukuran font untuk header */
+    }
+
+    .video-box {
+        width: calc(50% - 20px); /* Ukuran responsif untuk 2 kolom */
+    }
+}
+
+@media screen and (max-width: 480px) {
+    header h1 {
+        font-size: 24px; /* Mengurangi ukuran font untuk header di layar kecil */
+    }
+
+    nav ul {
+        flex-direction: column; /* Menjadikan menu vertikal */
+        align-items: center;
+    }
+
+    nav ul li {
+        margin: 10px 0; /* Jarak antar item menu */
+    }
+
+    .video-box {
+        width: 90%; /* Ukuran responsif untuk 1 kolom */
+    }
+}

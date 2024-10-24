@@ -1,0 +1,1 @@
+const labelText = document.querySelector(".question1");

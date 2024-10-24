@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz - EngLab</title>
+    <link rel="stylesheet" href="quiz.css"> <!-- Link to external CSS file -->
+</head>
+<body>
+
+    <header>
+        <div class="logo-container">
+            <img src="logo.png" alt="EngLab Logo" class="logo">
+        </div>
+        <h1>Quiz</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li> <!-- Back to homepage -->
+                <li><a href="books.html">Library</a></li>
+                <li><a href="videos.html">Videos</a></li>
+                <li><a href="quiz.html">Quiz</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    
+
+    <div class="quiz-container">
+        <div class="quiz-box" id="quizBox1">
+            <h2>Grammar Quiz</h2>
+            <p>Test your grammar knowledge.</p>
+            <div class="countdown" id="countdown1" style="display: none;">STARTING IN 3</div>
+        </div>
+        <div class="quiz-box" id="quizBox2">
+            <h2>Vocabulary Quiz</h2>
+            <p>Expand your vocabulary with this quiz.</p>
+            <div class="countdown" id="countdown2" style="display: none;">STARTING IN 3</div>
+        </div>
+        <div class="quiz-box" id="quizBox3">
+            <h2>Reading & Writing Quiz</h2>
+            <p>Improve your reading and writing skills.</p>
+            <div class="countdown" id="countdown3" style="display: none;">STARTING IN 3</div>
+        </div>
+    </div>
+    
+    <div id="quizQuestion" style="display: none;">
+        <form id="quizForm">
+            <!-- Question 1 -->
+            <div class="question">
+                <h3>1. Which sentence is correct?</h3>
+                <input type="radio" name="q1" value="A"> She don't like apples.<br>
+                <input type="radio" name="q1" value="B"> She doesn’t like apples.<br>
+                <input type="radio" name="q1" value="C"> She doesn’t likes apples.<br>
+            </div>
+    
+            <!-- Question 2 -->
+            <div class="question">
+                <h3>2. Choose the correct past tense of 'go'.</h3>
+                <input type="radio" name="q2" value="A"> Go<br>
+                <input type="radio" name="q2" value="B"> Goes<br>
+                <input type="radio" name="q2" value="C"> Went<br>
+            </div>
+    
+            <!-- Question 3 -->
+            <div class="question">
+                <h3>3. What is the plural form of 'child'?</h3>
+                <input type="radio" name="q3" value="A"> Childs<br>
+                <input type="radio" name="q3" value="B"> Children<br>
+                <input type="radio" name="q3" value="C"> Childes<br>
+            </div>
+    
+            <!-- Question 4 -->
+            <div class="question">
+                <h3>4. Which sentence uses the correct preposition?</h3>
+                <input type="radio" name="q4" value="A"> He is good in playing basketball.<br>
+                <input type="radio" name="q4" value="B"> He is good at playing basketball.<br>
+                <input type="radio" name="q4" value="C"> He is good with playing basketball.<br>
+            </div>
+    
+            <!-- Question 5 -->
+            <div class="question">
+                <h3>5. What is the correct form of the verb in this sentence: "She ____ a book now."</h3>
+                <input type="radio" name="q5" value="A"> Read<br>
+                <input type="radio" name="q5" value="B"> Reads<br>
+                <input type="radio" name="q5" value="C"> Is reading<br>
+            </div>
+    
+            <!-- Submit Button -->
+            <button type="button" onclick="submitQuiz()">Submit</button>
+        </form>
+    
+        <!-- Result section -->
+        <div id="quizResult" style="display: none;">
+            <h3>Your Result:</h3>
+            <p id="resultText"></p>
+        </div>
+    </div>
+    
+    <script src="quizscript.js"></script> <!-- Linking to external JavaScript -->
+</body>
+</html>
