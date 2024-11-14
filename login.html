@@ -26,7 +26,7 @@
     <main>
         <section class="form-section">
             <h2>Log in to EngLab</h2>
-            <form action="#" method="post" class="auth-form">
+            <form id="login-form" class="auth-form">
                 <label for="email">Email:</label>
                 <input type="email" id="email" name="email" required>
 
@@ -42,5 +42,45 @@
     <footer>
         <p>&copy; EngLab by Angelica A. All Rights Reserved.</p>
     </footer>
+
+    <!-- Firebase SDK dan fungsi login -->
+    <script type="module">
+        // Import Firebase dependencies
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyCRI9NPEsq46b7jy95QhYugyNetGzJ93DU",
+            authDomain: "englab-f6b6c.firebaseapp.com",
+            projectId: "englab-f6b6c",
+            storageBucket: "englab-f6b6c.appspot.com",
+            messagingSenderId: "55652182721",
+            appId: "1:55652182721:web:0d0eaadaf195b8109c0240",
+            measurementId: "G-JC7CJFRHS1"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // Handle login
+        document.getElementById("login-form").addEventListener("submit", function(event) {
+            event.preventDefault();
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+
+            signInWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    alert("Login successful!");
+                    window.location.href = "index.html";
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    alert(`Error: ${errorMessage}`);
+                });
+        });
+    </script>
 </body>
 </html>

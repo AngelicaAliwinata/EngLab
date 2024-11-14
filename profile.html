@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>User Profile - EngLab</title>
+    <link rel="stylesheet" href="profile.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="logo.png" alt="EngLab Logo" class="logo">
+            <h1>EngLab</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="books.html">Library</a></li>
+                <li><a href="videos.html">Videos</a></li>
+                <li><a href="quiz.html">Quiz</a></li>
+                <li><a href="profile.html">Profile</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <section class="profile-section">
+           
+            <!-- Profile Container -->
+            <div id="profile-container" class="profile-container">
+                <img src="profile.jpg.png" alt="User Avatar" class="profile-avatar">
+                <div class="profile-details">
+                    <p><strong>Username:</strong> <span id="username">Loading...</span></p>
+                    <p><strong>Email:</strong> <span id="email">Loading...</span></p>
+                    <p><strong>Member Since:</strong> <span id="member-since">Loading...</span></p>
+                </div>
+                <div class="profile-actions">
+                    <button id="logout-button">Log Out</button>
+                    <button id="change-password-button">Change Password</button>
+                </div>
+            </div>
+            
+            <!-- Hidden Change Password Form inside container -->
+            <div id="change-password-form" class="change-password-form">
+                <h3>Change Password</h3>
+                <form id="password-form">
+                    <label for="current-password">Current Password:</label>
+                    <input type="password" id="current-password" required>
+                    <label for="new-password">New Password:</label>
+                    <input type="password" id="new-password" required>
+                    <button type="submit">Change Password</button>
+                    <button type="button" id="cancel-button">Cancel</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; EngLab by Angelica A. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Firebase SDK -->
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"></script>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+        import { getAuth, onAuthStateChanged, signOut, updatePassword, EmailAuthProvider, reauthenticateWithCredential } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyCRI9NPEsq46b7jy95QhYugyNetGzJ93DU",
+            authDomain: "englab-f6b6c.firebaseapp.com",
+            projectId: "englab-f6b6c",
+            storageBucket: "englab-f6b6c.appspot.com",
+            messagingSenderId: "55652182721",
+            appId: "1:55652182721:web:0d0eaadaf195b8109c0240",
+            measurementId: "G-JC7CJFRHS1"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // Display user information if logged in
+        onAuthStateChanged(auth, user => {
+            if (user) {
+                // Display the user's displayName if available
+                const displayName = user.displayName ? user.displayName : "Anonymous";
+                document.getElementById('username').textContent = displayName;
+                document.getElementById('email').textContent = user.email;
+                document.getElementById('member-since').textContent = user.metadata.creationTime;
+            } else {
+                // Redirect to login page if not logged in
+                window.location.href = "login.html";
+            }
+        });
+
+        // Logout functionality
+        document.getElementById("logout-button").addEventListener("click", () => {
+            signOut(auth).then(() => {
+                window.location.href = "index.html";
+            }).catch(error => {
+                console.error("Logout error:", error);
+            });
+        });
+
+        // Show change password form
+        document.getElementById("change-password-button").addEventListener("click", () => {
+            // Hide profile container and show change password form
+            document.getElementById("profile-container").style.display = "none";
+            document.getElementById("change-password-form").style.display = "block";
+        });
+
+        // Cancel password change
+        document.getElementById("cancel-button").addEventListener("click", () => {
+            // Show profile container again and hide change password form
+            document.getElementById("profile-container").style.display = "block";
+            document.getElementById("change-password-form").style.display = "none";
+        });
+
+        // Handle change password
+        document.getElementById("password-form").addEventListener("submit", function(event) {
+            event.preventDefault();
+            const newPassword = document.getElementById("new-password").value;
+            const currentPassword = document.getElementById("current-password").value;
+            const user = auth.currentUser;
+
+            if (user) {
+                const credential = EmailAuthProvider.credential(user.email, currentPassword);
+
+                // Re-authenticate the user
+                reauthenticateWithCredential(user, credential).then(() => {
+                    // After successful re-authentication, update password
+                    updatePassword(user, newPassword).then(() => {
+                        alert("Password changed successfully!");
+                        document.getElementById("change-password-form").style.display = "none";
+                        document.getElementById("profile-container").style.display = "block";
+                    }).catch((error) => {
+                        alert("Error changing password: " + error.message);
+                    });
+                }).catch((error) => {
+                    alert("Re-authentication failed: " + error.message);
+                });
+            }
+        });
+    </script>
+</body>
+</html>

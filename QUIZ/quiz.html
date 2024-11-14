@@ -1,3 +1,77 @@
+<!-- Tambahkan Firebase SDK dan konfigurasi di dalam tag <head> atau sebelum skrip lainnya -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js"></script>
+    
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"></script>
+
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyCRI9NPEsq46b7jy95QhYugyNetGzJ93DU",
+            authDomain: "englab-f6b6c.firebaseapp.com",
+            projectId: "englab-f6b6c",
+            storageBucket: "englab-f6b6c.appspot.com",
+            messagingSenderId: "55652182721",
+            appId: "1:55652182721:web:0d0eaadaf195b8109c0240",
+            measurementId: "G-JC7CJFRHS1"
+        };
+
+        // Inisialisasi Firebase
+        const app = firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore(app);  // Inisialisasi Firestore
+
+        function submitQuiz() {
+        const answers = {
+            q1: 'B',
+            q2: 'C',
+            q3: 'B',
+            q4: 'B',
+            q5: 'C'
+        };
+
+        let score = 0;
+
+        // Loop through answers and compare with user input
+        for (let question in answers) {
+            const userAnswer = document.querySelector(`input[name="${question}"]:checked`);
+            if (userAnswer && userAnswer.value === answers[question]) {
+                score++;
+            }
+        }
+
+        // Display result
+        document.getElementById('quizForm').style.display = 'none';
+        document.getElementById('quizResult').style.display = 'block';
+        document.getElementById('resultText').textContent = `You scored ${score} out of 5.`;
+
+        // Optionally, provide feedback based on score
+        if (score === 5) {
+            document.getElementById('resultText').textContent += " Excellent!";
+        } else if (score >= 3) {
+            document.getElementById('resultText').textContent += " Good job!";
+        } else {
+            document.getElementById('resultText').textContent += " Keep practicing!";
+        }
+
+        const quizLevel = document.getElementById('quizLevel').textContent; // Misalnya "Level 1"
+        const timestamp = new Date().toISOString();
+
+        // Menyimpan data ke Firestore pada koleksi 'users' dengan dokumen berdasarkan level
+        db.collection('users').doc(quizLevel).set({
+            level: quizLevel,
+            score: score,
+            timestamp: timestamp
+        })
+        .then(() => {
+            console.log("Skor berhasil disimpan ke Firestore");
+        })
+        .catch((error) => {
+            console.error("Gagal menyimpan skor ke Firestore:", error);
+        });
+    }
+
+    </script>
+
+    
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,12 +93,11 @@
                 <li><a href="books.html">Library</a></li>
                 <li><a href="videos.html">Videos</a></li>
                 <li><a href="quiz.html">Quiz</a></li>
-                <li><a href="profile.html">Profile</a></li>
             </ul>
         </nav>
     </header>
 
-    
+    <h1>Start Quiz!</h1>
 
     <div class="quiz-container">
         <div class="quiz-box" id="quizBox1">
@@ -87,7 +160,7 @@
             </div>
     
             <!-- Submit Button -->
-            <button type="button" class="submit">Submit</button>
+            <button type="button" onclick="submitQuiz()">Submit</button>
         </form>
     
         <!-- Result section -->
@@ -97,6 +170,6 @@
         </div>
     </div>
     
-    <script type="module" src="quizscript.js"></script> <!-- Linking to external JavaScript -->
+    <script src="quizscript.js"></script> <!-- Linking to external JavaScript -->
 </body>
 </html>
